@@ -596,6 +596,7 @@ const struct Binding OpEditor[] = { /* map: editor */
   { "backward-char",         OP_EDITOR_BACKWARD_CHAR,        "\002" },          // Ctrl-B
   { "backward-word",         OP_EDITOR_BACKWARD_WORD,        "\033b" },         // <Alt-b>
   { "bol",                   OP_EDITOR_BOL,                  "\001" },          // Ctrl-A
+  { "cancel",                OP_EDITOR_CANCEL,               NULL },
   { "capitalize-word",       OP_EDITOR_CAPITALIZE_WORD,      "\033c" },         // <Alt-c>
   { "complete",              OP_EDITOR_COMPLETE,             "\t" },
   { "complete-query",        OP_EDITOR_COMPLETE_QUERY,       "\024" },          // Ctrl-T

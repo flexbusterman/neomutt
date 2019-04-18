@@ -99,6 +99,7 @@
   _fmt(OP_EDITOR_BACKWARD_CHAR,           N_("move the cursor one character to the left")) \
   _fmt(OP_EDITOR_BACKWARD_WORD,           N_("move the cursor to the beginning of the word")) \
   _fmt(OP_EDITOR_BOL,                     N_("jump to the beginning of the line")) \
+  _fmt(OP_EDITOR_CANCEL,                  N_("cancel prompt")) \
   _fmt(OP_EDITOR_CAPITALIZE_WORD,         N_("capitalize the word")) \
   _fmt(OP_EDITOR_COMPLETE,                N_("complete filename or alias")) \
   _fmt(OP_EDITOR_COMPLETE_QUERY,          N_("complete address with query")) \

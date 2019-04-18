@@ -269,6 +269,10 @@ int mutt_enter_string_full(char *buf, size_t buflen, int col,
       redraw = MUTT_REDRAW_LINE;
       switch (ch)
       {
+        case OP_EDITOR_CANCEL:
+		goto bye;
+		break;
+
         case OP_EDITOR_HISTORY_UP:
           state->curpos = state->lastchar;
           if (mutt_hist_at_scratch(hclass))
