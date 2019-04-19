@@ -299,6 +299,7 @@ static int start_curses(void)
    * its own SIGWINCH handler */
   mutt_signal_init();
 #endif
+  setenv("ESCDELAY", "0", 0);
   if (!initscr())
   {
     mutt_error(_("Error initializing terminal"));
