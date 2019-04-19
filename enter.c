@@ -270,6 +270,7 @@ int mutt_enter_string_full(char *buf, size_t buflen, int col,
       switch (ch)
       {
         case OP_EDITOR_CANCEL:
+          rc = -1;
           goto bye;
           break;
 
