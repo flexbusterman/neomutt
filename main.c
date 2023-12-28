@@ -323,7 +323,8 @@ static int start_curses(void)
   /* should come before initscr() so that ncurses 4.2 doesn't try to install
    * its own SIGWINCH handler */
   mutt_signal_init();
-
+  #endif
+  setenv("ESCDELAY", "0", 0);
   if (!initscr())
   {
     mutt_error(_("Error initializing terminal"));
@@ -433,7 +434,7 @@ static void log_translation(void)
       len = (nl - lang);
   }
   else
-  {
+{
     lang = "NONE";
   }
 
@@ -767,7 +768,7 @@ main
 
   /* Check for a batch send. */
   if (!isatty(0) || !STAILQ_EMPTY(&queries) || !STAILQ_EMPTY(&alias_queries) ||
-      dump_variables || batch_mode)
+    dump_variables || batch_mode)
   {
     OptNoCurses = true;
     sendflags = SEND_BATCH;
@@ -878,7 +879,7 @@ main
         buf_pool_release(&buf);
       }
       else
-      {
+    {
         rc = 1;
         printf("%s\n", np->data); // TEST19: neomutt -A unknown
       }
@@ -955,7 +956,7 @@ main
     goto main_curses;
   }
   else if (subject || e || draft_file || include_file ||
-           !STAILQ_EMPTY(&attach) || (optind < argc))
+    !STAILQ_EMPTY(&attach) || (optind < argc))
   {
     FILE *fp_in = NULL;
     FILE *fp_out = NULL;
@@ -984,14 +985,14 @@ main
         }
       }
       else
-      {
+    {
         mutt_addrlist_parse(&e->env->to, argv[i]);
       }
     }
 
     const bool c_auto_edit = cs_subset_bool(NeoMutt->sub, "auto_edit");
     if (!draft_file && c_auto_edit && TAILQ_EMPTY(&e->env->to) &&
-        TAILQ_EMPTY(&e->env->cc))
+      TAILQ_EMPTY(&e->env->cc))
     {
       mutt_error(_("No recipients specified"));
       email_free(&e);
@@ -1013,7 +1014,7 @@ main
       infile = include_file;
     }
     else
-    {
+  {
       edit_infile = false;
     }
 
@@ -1033,7 +1034,7 @@ main
           fp_in = stdin;
         }
         else
-        {
+      {
           buf_strcpy(&expanded_infile, infile);
           buf_expand_path(&expanded_infile);
           fp_in = fopen(buf_string(&expanded_infile), "r");
@@ -1053,7 +1054,7 @@ main
         sendflags |= SEND_NO_FREE_HEADER;
       }
       else
-      {
+    {
         /* Copy input to a tempfile, and re-point fp_in to the tempfile.
          * Note: stdin is always copied to a tempfile, ensuring draft_file
          * can stat and get the correct st_size below.  */
@@ -1151,7 +1152,7 @@ main
        * Note that SEND_NO_FREE_HEADER is set above so it isn't unlinked.  */
       else if (edit_infile)
         bodyfile = buf_string(&expanded_infile);
-      // For bodytext and unedited include_file: use the tempfile.
+        // For bodytext and unedited include_file: use the tempfile.
       else
         bodyfile = buf_string(&tempfile);
 
@@ -1176,7 +1177,7 @@ main
           b = b->next;
         }
         else
-        {
+      {
           b = mutt_make_file_attach(np->data, NeoMutt->sub);
           e->body = b;
         }
@@ -1229,7 +1230,7 @@ main
         const bool c_crypt_protected_headers_read = cs_subset_bool(NeoMutt->sub, "crypt_protected_headers_read");
         mutt_rfc822_write_header(fp_out, e->env, e->body, MUTT_WRITE_HEADER_POSTPONE, false,
                                  c_crypt_protected_headers_read &&
-                                     mutt_should_hide_protected_subject(e),
+                                 mutt_should_hide_protected_subject(e),
                                  NeoMutt->sub);
         const bool c_resume_edited_draft_files = cs_subset_bool(NeoMutt->sub, "resume_edited_draft_files");
         if (c_resume_edited_draft_files)
@@ -1264,7 +1265,7 @@ main
     goto main_curses;
   }
   else
-  {
+{
     if (flags & MUTT_CLI_MAILBOX)
     {
       const bool c_imap_passive = cs_subset_bool(NeoMutt->sub, "imap_passive");
@@ -1330,7 +1331,7 @@ main
       nntp_expand_path(folder.data, folder.dsize, &CurrentNewsSrv->conn->account);
     }
     else
-    {
+  {
       buf_expand_path(&folder);
     }
 
